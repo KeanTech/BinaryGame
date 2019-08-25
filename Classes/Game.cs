@@ -1,57 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using BinaryGame;
 namespace BinaryGame
 {
     class Game
     {
-        public string GameMode { get; set; }
-        Player playerStats = new Player();
+        GameSettings GetGameSettings = new GameSettings();
         
-        bool Bonus = false;
-        
-
-        public int NumberGenerator()
+        int number;
+        private bool answer;
+        public int GetDecimal(int Mode)
         {
-            NumberGenerator GetNumber = new NumberGenerator();
-            if (string.IsNullOrEmpty(GameMode))
+            Random rng = new Random();
+            if (Mode == 0)
             {
-                GameMode = "easy";    
+                number = rng.Next(8, 31);
             }
-            return GetNumber.Number(GameMode);
+            if (Mode == 1)
+            {
+                number = rng.Next(32, 63);
+            }
+            if (Mode == 2)
+            {
+               number = rng.Next(64, 128);
+            }
+            return number;
         }
-
-        public void NewGame(string PlayerName)
+        public int ConvertToDecimal(int binary)
         {
-            Player player = new Player
+            int dec = 0, pow = 1, rem;
+
+            while (binary > 0)
             {
-                Name = PlayerName
-            };
-            
-
-
+                rem = binary % 10;
+                dec = dec + rem * pow;
+                binary = binary / 10;
+                pow = pow * 2;
+            }
+            return dec;
         }
-        public void Points(bool Anwser)
+        public bool Answer(string Input)
         {
-            Binary answer = new Binary();
-            if (Anwser == false)
-            {
-                playerStats.Points -= 1;
-                Bonus = false;
-            }
-            if (Anwser && Bonus == true)
-            {
-                playerStats.Points += 2;
-            }
-            else if (Anwser == true)
-            {
-                playerStats.Points += 1;
-                Bonus = true;
-            }
-        }
+            GameSettings game = new GameSettings();
+            int dec;
+            dec = ConvertToDecimal(int.Parse(Input));
 
+            if(dec == GetDecimal(game.Difficulty))
+            {
+                answer = true;
+            }
+            else
+            {
+                answer = false;
+            }
+            return answer;
+        }
     }
 }

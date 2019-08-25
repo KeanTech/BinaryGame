@@ -9,10 +9,9 @@ namespace BinaryGame
 {
     class Program
     {
-
         static void Main(string[] args)
         {
-            //Old Game
+            //Old GameSettings
             #region
             ////Will make a set a three rnd's
             //NumberGenerator newnumber = new NumberGenerator();
@@ -40,7 +39,7 @@ namespace BinaryGame
             //quiznumber = newnumber.GenerateNum(player.Score);
             //player.Name = input;
 
-            ////Game loop will keep the user in the loop unless they enter nothing or they type q
+            ////GameSettings loop will keep the user in the loop unless they enter nothing or they type q
             //while (GameRunning == true)
             // {
             //    player.Result = player.Score + player.Bonus;
@@ -157,18 +156,23 @@ namespace BinaryGame
             //    }
             //}
 
-            #endregion 
+            #endregion
 
 
             //Test
+            int NumberOfRounds = 5;
+            string aName = "kenneth";
+            Console.WriteLine("This is a game console!\n" +
+                "I will give you a random number then you need to give me a binary!\n" +
+                "If the binary matches the number you will get 1 point!, two in a row gives 2 points!");
 
+            GameSettings settings = new GameSettings();
             Game game = new Game();
 
-            while (game.NumberGenerator() > 0)
-            {
-                Console.WriteLine(game.NumberGenerator());
-                
-            }
+            settings.GameMode("1");
+
+            Console.Write();
+            Console.ReadKey();
         }
     }
 }
